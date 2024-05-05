@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m240504_101703_device_type
+ * Class m240504_112214_manufacturer
  */
-class m240504_101703_device_type extends Migration
+class m240504_112214_manufacturer extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('device_type', [
+        $this->createTable('manufacturer', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull()->unique()->comment('Наименование'),
             'created_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
@@ -25,6 +25,6 @@ class m240504_101703_device_type extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('device_type');
+        $this->dropTable('manufacturer');
     }
 }

@@ -14,8 +14,8 @@ class m240504_171748_territory extends Migration
     {
         $this->createTable('territory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(255)->notNull()->comment('Наименование'),
-            'district' => "ENUM('common', 'shop', 'service') NOT NULL",
+            'name' => $this->string(255)->notNull()->unique()->comment('Наименование'),
+            'district' => "ENUM('central', 'southern', 'northwestern', 'far_eastern', 'siberian', 'ural', 'volga', 'north_caucasian') NOT NULL",
             'created_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
             'updated_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
         ]);

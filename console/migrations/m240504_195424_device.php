@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m240504_145424_device
+ * Class m240504_195424_device
  */
-class m240504_145424_device extends Migration
+class m240504_195424_device extends Migration
 {
     /**
      * {@inheritdoc}
@@ -14,9 +14,11 @@ class m240504_145424_device extends Migration
     {
         $this->createTable('device', [
             'id' => $this->primaryKey(),
-            'price' => $this->integer()->notNull()->comment('Цена'),
+            'status' => "ENUM('shop', 'store', 'sales', 'repair', 'defect', 'shipping', 'deleted') NOT NULL",
+            'store_id' => $this->integer()->comment('Склад'),
             'serial_number' => $this->string(255)->notNull()->unique()->comment('Серийный номер'),
             'device_model_id' => $this->integer()->notNull()->comment('Модель'),
+            'price' => $this->integer()->notNull()->comment('Цена'),
             'manufacturer_country' => $this->string(255)->notNull()->comment('Страна производитель'),
             'created_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
             'updated_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
@@ -37,6 +39,22 @@ class m240504_145424_device extends Migration
             'RESTRICT',
             'CASCADE'
         );
+
+        $this->createIndex(
+            'idx-device-store_id',
+            'device',
+            'store_id'
+        );
+
+        $this->addForeignKey(
+            'fk-device-store_id',
+            'device',
+            'store_id',
+            'store',
+            'id',
+            'RESTRICT',
+            'CASCADE'
+        );
     }
 
     /**
@@ -51,6 +69,16 @@ class m240504_145424_device extends Migration
 
         $this->dropIndex(
             'idx-device-device_model_id',
+            'device'
+        );
+
+        $this->dropForeignKey(
+            'fk-device-store_id',
+            'device'
+        );
+
+        $this->dropIndex(
+            'idx-device-store_id',
             'device'
         );
 
