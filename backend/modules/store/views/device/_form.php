@@ -1,5 +1,10 @@
 <?php
 
+use common\helpers\StoreHelper;
+use common\models\Country;
+use common\models\DeviceModel;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,20 +18,31 @@ use yii\widgets\ActiveForm;
 <div class="device-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'storeId')->widget(Select2::class, [
+        'data' => ArrayHelper::map(StoreHelper::getUserStores(Yii::$app->user->id), 'id', 'name'),
+        'options' => [
+            'placeholder' => 'Выберите склад'
+        ],
+    ]); ?>
 
-<!--    --><?php //= $form->field($model, 'price')->textInput() ?>
+    <?= $form->field($model, 'deviceModelId')->widget(Select2::class, [
+        'data' => ArrayHelper::map(DeviceModel::find()->all(), 'id', 'name'),
+        'options' => [
+            'placeholder' => 'Выберите модель'
+        ],
+    ]); ?>
 
-<!--    --><?php //= $form->field($model, 'serial_number')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'serialNumber')->textInput() ?>
 
-    <?= $form->field($model, 'deviceModelId')->textInput() ?>
-    <?php foreach ($devices as $device) {
-            echo implode(',', $device);
-    } ?>
-
-<!--    --><?php //= $form->field($model, 'manufacturer_country')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'manufacturerCountryId')->widget(Select2::class, [
+        'data' => ArrayHelper::map(Country::find()->all(), 'id', 'name'),
+        'options' => [
+            'placeholder' => 'Выберите страну'
+        ],
+    ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

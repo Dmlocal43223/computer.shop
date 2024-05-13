@@ -9,6 +9,8 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 ?>
@@ -28,16 +30,15 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'computer.shop',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            'class' => 'navbar navbar-expand-lg navbar-light bg-light',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Каталог', 'url' => ['/site/index']],
+        ['label' => 'Магазины', 'url' => ['/site/about']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -47,19 +48,37 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
     ]);
+
+
+    echo Nav::widget([
+        'items' => [
+            '<form class="form-inline my-2 my-lg-0" action="' . Url::to(['/site/search']) . '" method="get">
+                <input class="mr-sm-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+            </form>',
+        ],
+        'encodeLabels' => false,
+    ]);
+
     if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
+        echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
     } else {
-        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout text-decoration-none']
-            )
-            . Html::endForm();
+        echo Html::a('<img src="/uploads/icons/cart.png" alt=cart" style="width: 30px; height: 30px; margin-left: 10px;">', ['/site/page1']);
+        echo Html::a('<img src="/uploads/icons/favorite.png" alt="favorite" style="width: 30px; height: 30px; margin-left: 10px;">', ['/site/page1']);
+        echo Html::a('<img src="/uploads/icons/profile.png" alt="profile" style="width: 30px; height: 30px; margin-left: 10px;">', ['/site/page1']);
+
+//        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+//            . Html::submitButton(
+//                'Logout (' . Yii::$app->user->identity->username . ')',
+//                ['class' => 'btn btn-link text-decoration-none']
+//            )
+//            . Html::endForm();
     }
+
     NavBar::end();
     ?>
 </header>
+
 
 <main role="main" class="flex-shrink-0">
     <div class="container">
@@ -73,8 +92,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
+        <p class="float-start">&copy; computer.shop <?= date('Y') ?></p>
     </div>
 </footer>
 

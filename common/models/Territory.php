@@ -59,8 +59,8 @@ class Territory extends ActiveRecord
             'id' => 'ID',
             'name' => 'Наименование',
             'district' => 'Округ',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

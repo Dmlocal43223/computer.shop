@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\store\controllers;
+namespace backend\modules\store\controllers;
 
 use common\models\Manufacturer;
-use app\modules\store\models\search\ManufacturerSearch;
+use backend\modules\store\models\search\ManufacturerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ManufacturerController implements the CRUD actions for Manufacturer model.
+ * ManufacturerController implements the CRUD actions for manufacturer model.
  */
 class ManufacturerController extends Controller
 {
@@ -32,7 +32,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Lists all Manufacturer models.
+     * Lists all manufacturer models.
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Displays a single Manufacturer model.
+     * Displays a single manufacturer model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,7 +61,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Creates a new Manufacturer model.
+     * Creates a new manufacturer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
@@ -83,7 +83,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Updates an existing Manufacturer model.
+     * Updates an existing manufacturer model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Deletes an existing Manufacturer model.
+     * Deletes an existing manufacturer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,7 +117,7 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Finds the Manufacturer model based on its primary key value.
+     * Finds the manufacturer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
      * @return Manufacturer the loaded model

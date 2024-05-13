@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'serial_number',
             'device_model_id',
-            'manufacturer_country',
+            'manufacturer_country_id',
             'created_at',
             'updated_at',
         ],

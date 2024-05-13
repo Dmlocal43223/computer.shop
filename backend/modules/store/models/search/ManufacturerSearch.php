@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\store\models\search;
+namespace backend\modules\store\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Manufacturer;
 
 /**
- * ManufacturerSearch represents the model behind the search form of `common\models\Manufacturer`.
+ * ManufacturerSearch represents the model behind the search form of `common\models\manufacturer`.
  */
 class ManufacturerSearch extends Manufacturer
 {

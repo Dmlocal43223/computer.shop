@@ -15,11 +15,12 @@ class m240504_195424_device extends Migration
         $this->createTable('device', [
             'id' => $this->primaryKey(),
             'status' => "ENUM('shop', 'store', 'sales', 'repair', 'defect', 'shipping', 'deleted') NOT NULL",
+            'image' => $this->string(255)->comment('Изображение'),
             'store_id' => $this->integer()->comment('Склад'),
             'serial_number' => $this->string(255)->notNull()->unique()->comment('Серийный номер'),
             'device_model_id' => $this->integer()->notNull()->comment('Модель'),
             'price' => $this->integer()->notNull()->comment('Цена'),
-            'manufacturer_country' => $this->string(255)->notNull()->comment('Страна производитель'),
+            'manufacturer_country_id' => $this->integer()->notNull()->comment('Страна производитель'),
             'created_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
             'updated_at' => $this->dateTime()->notNull()->defaultExpression('NOW()'),
         ]);
@@ -55,6 +56,22 @@ class m240504_195424_device extends Migration
             'RESTRICT',
             'CASCADE'
         );
+
+        $this->createIndex(
+            'idx-device-manufacturer_country_id',
+            'device',
+            'manufacturer_country_id'
+        );
+
+        $this->addForeignKey(
+            'fk-device-manufacturer_country_id',
+            'device',
+            'manufacturer_country_id',
+            'country',
+            'id',
+            'RESTRICT',
+            'CASCADE'
+        );
     }
 
     /**
@@ -81,6 +98,16 @@ class m240504_195424_device extends Migration
             'idx-device-store_id',
             'device'
         );
+
+//        $this->dropForeignKey(
+//            'fk-device-manufacturer_country_id',
+//            'device'
+//        );
+//
+//        $this->dropIndex(
+//            'idx-device-manufacturer_country_id',
+//            'device'
+//        );
 
         $this->dropTable('device');
     }

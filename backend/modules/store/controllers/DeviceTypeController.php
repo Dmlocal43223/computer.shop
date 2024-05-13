@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\store\controllers;
+namespace backend\modules\store\controllers;
 
 use common\models\DeviceType;
 use app\modules\store\models\search\DeviceTypeSearch;
@@ -36,7 +36,7 @@ class DeviceTypeController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new DeviceTypeSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -65,7 +65,7 @@ class DeviceTypeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate(): \yii\web\Response|string
     {
         $model = new DeviceType();
 

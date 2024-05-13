@@ -2,8 +2,12 @@
 
 namespace backend\modules\store\controllers;
 
+use common\helpers\TerritoryHelper;
+use common\models\City;
 use common\models\Store;
 use backend\modules\store\models\search\StoreSearch;
+use Yii;
+use yii\db\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,8 +75,17 @@ class StoreController extends Controller
         $model = new Store();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            try {
+                $cityId = $_POST['Store']['city_id'] ?? null;
+                $territory = TerritoryHelper::getTerritoryByCityId($cityId);
+                $model->territory_id = $territory->id;
+
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } catch (\Throwable $exception) {
+                Yii::$app->session->setFlash('error', $exception->getMessage());
+                $model->loadDefaultValues();
             }
         } else {
             $model->loadDefaultValues();
@@ -95,6 +108,20 @@ class StoreController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            try {
+                $cityId = $_POST['Store']['city_id'] ?? null;
+                $territory = TerritoryHelper::getTerritoryByCityId($cityId);
+                $model->territory_id = $territory->id;
+
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } catch (\Throwable $exception) {
+                Yii::$app->session->setFlash('error', $exception->getMessage());
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

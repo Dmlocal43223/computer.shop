@@ -12,6 +12,7 @@ use Yii;
  * @property string $description Описание
  * @property int $price Цена
  * @property int $device_type_id Тип устройства
+ * @property int manufacturer_id Производитель
  * @property int|null $guarantee Гарантия
  * @property int|null $rating Рейтинг
  * @property string $created_at
@@ -36,12 +37,14 @@ class DeviceModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'price', 'device_type_id'], 'required'],
-            [['price', 'device_type_id', 'guarantee', 'rating'], 'integer'],
+            [['name', 'description', 'price', 'device_type_id', 'manufacturer_id'], 'required'],
+            [['price', 'device_type_id', 'guarantee', 'rating', 'manufacturer_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 1020],
+            ['rating', 'default', 'value' => 0],
             [['device_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => DeviceType::class, 'targetAttribute' => ['device_type_id' => 'id']],
+            [['manufacturer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manufacturer::class, 'targetAttribute' => ['manufacturer_id' => 'id']],
         ];
     }
 
@@ -52,14 +55,15 @@ class DeviceModel extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'price' => 'Price',
-            'device_type_id' => 'Device Type ID',
-            'guarantee' => 'Guarantee',
-            'rating' => 'Rating',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Наименование',
+            'description' => 'Описание',
+            'price' => 'Цена',
+            'device_type_id' => 'Тип устройства',
+            'manufacturer_id' => 'Производитель',
+            'guarantee' => 'Гарантия',
+            'rating' => 'Рейтинг',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

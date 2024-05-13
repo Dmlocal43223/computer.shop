@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\modules\store\models\search\DeviceTypeSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Device Types';
+$this->title = 'Типы устройств';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="device-type-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Device Type', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать тип устройства', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

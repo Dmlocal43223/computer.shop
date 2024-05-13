@@ -18,7 +18,7 @@ class DeviceSearch extends Device
     {
         return [
             [['id', 'price', 'device_model_id'], 'integer'],
-            [['serial_number', 'manufacturer_country', 'created_at', 'updated_at'], 'safe'],
+            [['serial_number', 'manufacturer_country_id', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class DeviceSearch extends Device
         ]);
 
         $query->andFilterWhere(['like', 'serial_number', $this->serial_number])
-            ->andFilterWhere(['like', 'manufacturer_country', $this->manufacturer_country]);
+            ->andFilterWhere(['like', 'manufacturer_country_id', $this->manufacturer_country_id]);
 
         return $dataProvider;
     }

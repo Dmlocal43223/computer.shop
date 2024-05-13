@@ -28,15 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'status',
+            'store_id',
             'price',
             'serial_number',
             'device_model_id',
-            'manufacturer_country',
+            'manufacturer_country_id',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Device $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                 },
+                'template' => '{view} {update}'
             ],
         ],
     ]); ?>

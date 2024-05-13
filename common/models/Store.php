@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  */
 class Store extends ActiveRecord
 {
+    public const TYPE_DECOMMISSION = 'decommission';
     /**
      * {@inheritdoc}
      */
@@ -60,8 +61,8 @@ class Store extends ActiveRecord
             'address' => 'Адрес',
             'territory_id' => 'Территория',
             'city_id' => 'Город',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

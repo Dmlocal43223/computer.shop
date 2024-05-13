@@ -8,5 +8,18 @@ use yii\base\Model;
 
 final class DeviceDTO extends Model
 {
-    public int $deviceModelId;
+    public ?int $storeId = null;
+    public ?int $deviceModelId = null;
+    public ?string $serialNumber = null;
+    public ?int $manufacturerCountryId = null;
+
+    public function rules(): array
+    {
+        return [
+            [['deviceModelId', 'serialNumber', 'storeId', 'manufacturerCountryId'], 'required'],
+            [['deviceModelId', 'storeId', 'manufacturerCountry'], 'integer'],
+            [['serialNumber'], 'string'],
+        ];
+    }
+
 }

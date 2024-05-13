@@ -23,11 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'device_model_id') ?>
 
-    <?= $form->field($model, 'manufacturer_country') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?= $form->field($model, 'manufacturer_country_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

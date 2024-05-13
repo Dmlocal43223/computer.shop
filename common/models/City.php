@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "city".
  *
@@ -21,7 +19,7 @@ class City extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'city';
     }
@@ -29,7 +27,7 @@ class City extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name', 'territory_id'], 'required'],
@@ -50,8 +48,8 @@ class City extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Наименование',
             'territory_id' => 'Территория',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

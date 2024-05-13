@@ -8,13 +8,15 @@ use yii\base\Model;
 
 final class CreateDeviceForm extends Model
 {
-    public ?int $deviceTypeId = null;
     public ?int $deviceModelId = null;
+    public ?string $serialNumber = null;
+    public ?int $storeId = null;
+    public ?int $manufacturerCountryId = null;
 
     public function rules(): array
     {
         return [
-            [['deviceModelId'], 'required'],
+            [['deviceModelId', 'serialNumber', 'storeId', 'manufacturerCountryId'], 'required'],
             [['deviceModelId'], 'integer'],
         ];
     }
@@ -22,8 +24,10 @@ final class CreateDeviceForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'deviceTypeId' => 'Тип',
             'deviceModelId' => 'Модель',
+            'serialNumber' => 'Серийный номер',
+            'storeId' => 'Склад',
+            'manufacturerCountryId' => 'Страна производитель',
         ];
     }
 }
